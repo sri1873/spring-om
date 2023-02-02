@@ -1,7 +1,7 @@
 package com.spring.om.services;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,10 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 
-	public Product getProductById(Integer productId) {
-		Optional<Product> prod = productRepository.findById(productId);
-		if (prod.isEmpty())
-			return null;
-		return prod.get();
+	public Product getProductById(UUID productId) {
+		Product prod = productRepository.findByUuid(productId);
+
+		return prod;
 	}
 
 	public void addProduct(Product product) {
@@ -31,8 +30,8 @@ public class ProductService {
 
 	}
 
-	public void deleteProductById(int productId) {
-		productRepository.deleteById(productId);
+	public void deleteProductById(UUID productId) {
+		productRepository.deleteByUuid(productId);
 		;
 	}
 

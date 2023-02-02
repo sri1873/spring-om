@@ -1,7 +1,7 @@
 package com.spring.om.services;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,8 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 
-	public Order getOrderById(Integer orderId) {
-		Optional<Order> prod = orderRepository.findById(orderId);
-		if (prod.isEmpty())
-			return null;
-		return prod.get();
+	public Order getOrderById(UUID orderId) {
+		return orderRepository.findByUuid(orderId);
 	}
 
 	public void placeOrder(Order order) {
@@ -30,8 +27,8 @@ public class OrderService {
 
 	}
 
-	public void cancelOrderById(int productId) {
-		orderRepository.deleteById(productId);
+	public void cancelOrderById(UUID productId) {
+		orderRepository.deleteByUuid(productId);
 		;
 	}
 

@@ -1,6 +1,9 @@
 package com.spring.om.controller;
 
 import java.util.List;
+import java.util.UUID;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +28,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/getProductById/{productId}")
-	public Product getProductById(@PathVariable int productId) {
+	public Product getProductById(@PathVariable UUID productId) {
 		return productService.getProductById(productId);
 	}
 
@@ -34,14 +37,16 @@ public class ProductController {
 		productService.addProduct(product);
 	}
 
+	@Transactional
 	@DeleteMapping("/deleteProductById/{productId}")
-	public void deleteProductById(@PathVariable int productId) {
+	public void deleteProductById(@PathVariable UUID productId) {
 		productService.deleteProductById(productId);
 	}
 
 	//	@PutMapping("/updateProductById/{productId}")
-	//	public Product updateProductById(@PathVariable int productId) {
-	//		return productService.updateProductById(productId);
+	//	public List<Product> updateProductById(@PathVariable List<Integer> productIds, @RequestBody ) {
+	//		prod
+	//		return productService.updateProductById(productIds);
 	//	}
 
 }

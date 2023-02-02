@@ -1,6 +1,9 @@
 package com.spring.om.controller;
 
 import java.util.List;
+import java.util.UUID;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +28,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/getOrderById/{orderId}")
-	public Order getOrderById(@PathVariable int orderId) {
+	public Order getOrderById(@PathVariable UUID orderId) {
 		return orderService.getOrderById(orderId);
 	}
 
@@ -34,8 +37,9 @@ public class OrderController {
 		orderService.placeOrder(order);
 	}
 
+	@Transactional
 	@DeleteMapping("/cancelOrderById/{orderId}")
-	public void cancelOrderById(@PathVariable int orderId) {
+	public void cancelOrderById(@PathVariable UUID orderId) {
 		orderService.cancelOrderById(orderId);
 	}
 

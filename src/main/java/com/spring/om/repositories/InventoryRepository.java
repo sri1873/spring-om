@@ -5,12 +5,12 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.spring.om.entities.Order;
+import com.spring.om.entities.Inventory;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
 
-	Order findByUuid(UUID orderId);
+	Inventory findByUuid(UUID productId);
 
 	void deleteByUuid(UUID productId);
 

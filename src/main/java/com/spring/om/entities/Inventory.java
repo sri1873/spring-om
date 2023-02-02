@@ -2,9 +2,12 @@ package com.spring.om.entities;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,13 +18,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
-public class Product {
+@Table(name = "product_inventory")
+public class Inventory {
 	@Id
-	@Column(name = "productId")
+	@Column(name = "id")
 	private UUID uuid = UUID.randomUUID();
-	private String imageUrl;
-	private String productName;
-	private String description;
-	private String uom;
+	private int quantity;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "product_id", referencedColumnName = "productId")
+	private Product product;
 }
