@@ -26,6 +26,8 @@ public class ProductService {
 	}
 
 	public void addProduct(Product product) {
+		Long nextSequenceValue = productRepository.getNextSequenceValue();
+		product.setUuid("Sri-"+ nextSequenceValue);
 		productRepository.save(product);
 
 	}

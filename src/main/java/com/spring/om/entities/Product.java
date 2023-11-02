@@ -2,10 +2,7 @@ package com.spring.om.entities;
 
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +13,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table
+@SequenceGenerator(name = "booking-sequence-generator", sequenceName = "your_sequence_name",allocationSize = 1,initialValue = 1)
 public class Product {
 	@Id
 	@Column(name = "productId")
-	private UUID uuid = UUID.randomUUID();
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "booking-sequence-generator")
+	private String uuid;
+	@Column(name = "prod_id")
+	private String prodId;
 	private String imageUrl;
 	private String productName;
 	private String description;
